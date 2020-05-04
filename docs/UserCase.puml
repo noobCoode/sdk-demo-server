@@ -1,0 +1,9 @@
+@startuml
+
+user ---> (create a fileInfo) : page1
+
+user ---> (download a fileInfo from server) : page2
+
+user ---> (edit a fileInfo and save) : page3
+
+@enduml
