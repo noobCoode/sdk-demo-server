@@ -41,8 +41,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/socket").addInterceptors(webSocketInterceptor).setAllowedOrigins("http://localhost:8080").withSockJS();
     }
 
-    /*@Override
+    @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(messageInterceptor);
-    }*/
+    }
 }

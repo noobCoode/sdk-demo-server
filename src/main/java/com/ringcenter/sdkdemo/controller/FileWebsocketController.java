@@ -1,7 +1,11 @@
 package com.ringcenter.sdkdemo.controller;
 
+import com.ringcenter.sdkdemo.model.WebSocketMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -11,10 +15,17 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class FileWebsocketController {
 
+    @Autowired
+    private SimpMessagingTemplate simpMessageSendingOperations;//消息发送模板
+
     @MessageMapping("/files/{title}")
     @SendTo("/topic/files/{title}")
-    public String websocket(String content) {
-        return content;
+    public WebSocketMessage websocket(String content) {
+        return new WebSocketMessage(true, content);
     }
 
+    @Scheduled(fixedRate = 1000*5)
+    public void whoCanEdit(){
+        simpMessageSendingOperations.convertAndSend("/topic/files/who", "我是从服务器来的消息!");
+    }
 }

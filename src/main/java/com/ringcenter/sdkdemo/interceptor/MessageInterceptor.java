@@ -8,16 +8,23 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Xu Dongdong
  * @date 2020-5-4
  */
 @Component
 public class MessageInterceptor implements ChannelInterceptor {
+    public static Map<String, List<String>> smap=new HashMap();
+
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
         StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
         if (StompCommand.CONNECT.equals(accessor.getCommand())) {
+            //todo
             accessor.getSessionAttributes().get("SessionId");
         } else if (StompCommand.DISCONNECT.equals(accessor.getCommand())) {
 

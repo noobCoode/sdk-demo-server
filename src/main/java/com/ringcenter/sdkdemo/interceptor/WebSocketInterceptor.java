@@ -8,7 +8,6 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,11 +19,8 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        /*HttpSession session = getSession(request);
-        if (session == null || session.getId() == null) {
-            return false;
-        }
-        attributes.put("SessionId", session.getId());*/
+        attributes.put("SessionId", ((ServletServerHttpRequest) request).getServletRequest().getSession().getId());
+        attributes.put("key",request.getURI().getPath());
         return true;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,7 @@ public class FileInfoController {
     }
 
     @GetMapping(value = "{title}")
+
     public ResponseEntity getFileDetail(@PathVariable("title") String title) {
         return ResponseEntityFactory.commonResult(fileService.getFileDetail(title));
     }
@@ -56,4 +58,5 @@ public class FileInfoController {
     public void downloadFile(@PathVariable("title") String title, HttpServletResponse response) throws IOException {
         fileService.downloadFileByTitle(title, response);
     }
+
 }
