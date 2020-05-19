@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class WebSocketServer {
 
-    private final static long RELEASE_TIME = 10000L;
+    private static final  long RELEASE_TIME = 60000L;
 
     /**
      * 存放
